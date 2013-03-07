@@ -41,14 +41,16 @@ exports['untag'] = function(test) {
 };
 
 exports['anchor'] = function(test) {
-  test.expect(8);
+  test.expect(10);
   test.equal(toc.anchor('foo'), 'foo', 'anchor is already lovely.');
   test.equal(toc.anchor('foo    bar     baz'), 'foo-bar-baz', 'spaces get converted to -');
   test.equal(toc.anchor('     foo  bar     '), 'foo-bar', 'leading / trailing spaces get stripped');
   test.equal(toc.anchor('foo----bar-----baz'), 'foo-bar-baz', 'multiple - get converted to -');
   test.equal(toc.anchor('-----foo  bar-----'), 'foo-bar', 'leading / trailing - get stripped');
   test.equal(toc.anchor('i can\'t "go" for that'), 'i-cant-go-for-that', 'quotes get stripped');
-  test.equal(toc.anchor('obj.method(this, [that])'), 'obj.method(this-that)', 'some other chars get stripped, yay');
+  test.equal(toc.anchor('obj / obj.method(this, [that])'), 'obj-obj.method-this-that', 'some other chars get stripped, yay');
+  test.equal(toc.anchor('obj.method ( this, [ that ] )'), 'obj.method-this-that', 'remove unnecessary - chars');
+  test.equal(toc.anchor('this: that :: the other'), 'this-that-the-other', 'replace : with - chars');
   test.equal(toc.anchor('фøó &amp; βåρ ♥ Бäž'), 'foo-and-bar-love-baz', 'entities and utf characters should be made happy');
   test.done();
 };
