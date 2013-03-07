@@ -59,7 +59,7 @@ var htmlWithAnchorsAndTOC = toc.process(html [, options]);
 
 ## Examples
 
-You can customize the hell out of the generated HTML, eg.
+The default HTML is pretty awesome, but you can customize the hell out of the generated HTML, eg.
 
 ```js
 var htmlWithAnchorsAndTOC = toc.process(html, {
