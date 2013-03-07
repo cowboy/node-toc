@@ -77,7 +77,3 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 2013-03-07 - v0.1.0 - First official release.
-
-## License
-Copyright (c) 2013 "Cowboy" Ben Alman  
-Licensed under the MIT license.
