@@ -1,4 +1,4 @@
-# toc
+# toc [![Build Status](https://secure.travis-ci.org/cowboy/node-toc.png?branch=master)](http://travis-ci.org/cowboy/node-toc)
 
 Linkify HTML headers and generate a TOC.
 
