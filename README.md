@@ -101,5 +101,6 @@ var processedHTML = toc.process(unprocessedHTML, {
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+2013-03-08 - v0.3.0 - Separated `.process` method internals into `.anchorize` and `.toc` methods. Renamed `toc` template option to `TOC`.  
 2013-03-07 - v0.2.0 - Second official release. Minor changes.  
 2013-03-07 - v0.1.0 - First official release.

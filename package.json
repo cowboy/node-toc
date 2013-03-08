@@ -1,7 +1,7 @@
 {
   "name": "toc",
   "description": "Linkify HTML headers and generate a TOC.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/cowboy/node-toc",
   "author": {
     "name": "\"Cowboy\" Ben Alman",
