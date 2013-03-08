@@ -67,6 +67,66 @@ exports['unique'] = function(test) {
   test.done();
 };
 
+exports['anchorize'] = {
+  'basic': function(test) {
+    test.expect(3);
+    var src = '<h1><b>H1</b> Header</h1>\n<h2 a=1><b>H2</b> Header</h2>\n<h3 b=2 c=3><b>H3</b> Header</h3>';
+    var expected = '<h1><b>H1</b> Header</h1>\n<h2 a=1><a href="#h2-header" name="h2-header"><b>H2</b> Header</a></h2>\n<h3 b=2 c=3><a href="#h3-header" name="h3-header"><b>H3</b> Header</a></h3>';
+    var actual = toc.anchorize(src);
+    test.equal(actual.src, src, 'should return unprocessed src.');
+    test.equal(actual.html, expected, 'should return processed html.');
+    test.deepEqual(actual.headers, [
+      {
+        level: 2,
+        attrs: ' a=1',
+        header: '<b>H2</b> Header',
+        text: 'H2 Header',
+        anchor: 'h2-header',
+        all: '<h2 a=1><b>H2</b> Header</h2>',
+      },
+      {
+        level: 3,
+        attrs: ' b=2 c=3',
+        header: '<b>H3</b> Header',
+        text: 'H3 Header',
+        anchor: 'h3-header',
+        all: '<h3 b=2 c=3><b>H3</b> Header</h3>',
+      },
+    ], 'should return array of header objects.');
+    test.done();
+  },
+  // more tests welcome
+};
+
+exports['toc'] = {
+  'basic': function(test) {
+    test.expect(1);
+    var headers = [
+      {
+        level: 2,
+        attrs: ' a=1',
+        header: '<b>H2</b> Header',
+        text: 'H2 Header',
+        anchor: 'h2-header',
+        all: '<h2 a=1><b>H2</b> Header</h2>',
+      },
+      {
+        level: 3,
+        attrs: ' b=2 c=3',
+        header: '<b>H3</b> Header',
+        text: 'H3 Header',
+        anchor: 'h3-header',
+        all: '<h3 b=2 c=3><b>H3</b> Header</h3>',
+      },
+    ];
+    var actual = toc.toc(headers);
+    var expected = '<div class="toc"><ul><li><a href="#h2-header">H2 Header</a><ul><li><a href="#h3-header">H3 Header</a></li></ul></li></ul></div>';
+    test.equal(actual, expected, 'should return generated TOC html.');
+    test.done();
+  },
+  // more tests welcome
+};
+
 exports['process'] = {
   'defaults': function(test) {
     test.expect(1);
