@@ -37,6 +37,7 @@ var guaranteedUniqueAnchor2 = toc.unique(names, toc.anchor(arbitraryText));
 
 
 ### toc.process
+Anchorize all headers and inline a generated TOC, returning processed HTML.
 
 ```js
 var htmlWithAnchorsAndTOC = toc.process(html [, options]);
@@ -44,17 +45,41 @@ var htmlWithAnchorsAndTOC = toc.process(html [, options]);
 
 #### options
 
+* **placeholder** - `RegExp` - Used to match TOC placeholder. Defaults to `/<!--\s*toc\s*-->/gi`.
+* _Because this method calls the `toc.anchorize` and `toc.toc` methods internally, their options may be specified as well._
+
+
+### toc.anchorize
+Parse HTML, returning an array of header objects and anchorized HTML.
+
+```js
+var obj = toc.anchorize(html [, options]);
+```
+
+#### options
+
+* **headers** - `RegExp` - Used to match HTML headers. Defaults to `/<h(\d)(\s*[^>]*)>([\s\S]+?)<\/h\1>/gi`.
 * **tocMin** - `Number` - Min header level to add to TOC. Defaults to `2`.
 * **tocMax** - `Number` - Max header level to add to TOC. Defaults to `6`.
 * **anchorMin** - `Number` - Min header level to anchorize. Defaults to `2`.
 * **anchorMax** - `Number` - Max header level to anchorize. Defaults to `6`.
 * **header** - `String` | `Function` - Lodash template string or function used to anchorize a header.
-* **toc** - `String` | `Function` - Lodash template string or function used to wrap the generated TOC.
+
+
+### toc.toc
+Generate TOC HTML from an array of header objects.
+
+```js
+var obj = toc.toc(headers [, options]);
+```
+
+#### options
+
 * **openUL** - `String` | `Function` - Lodash template string or function used to generate the TOC.
 * **closeUL** - `String` | `Function` - Lodash template string or function used to generate the TOC.
 * **openLI** - `String` | `Function` - Lodash template string or function used to generate the TOC.
 * **closeLI** - `String` | `Function` - Lodash template string or function used to generate the TOC.
-* **placeholder** - `RegExp` - Used to match TOC placeholder. Defaults to `/<!--\s*toc\s*-->/gi`.
+* **TOC** - `String` | `Function` - Lodash template string or function used to wrap the generated TOC.
 
 
 ## Examples
@@ -62,9 +87,9 @@ var htmlWithAnchorsAndTOC = toc.process(html [, options]);
 The default HTML is pretty awesome, but you can customize the hell out of the generated HTML, eg.
 
 ```js
-var htmlWithAnchorsAndTOC = toc.process(html, {
+var processedHTML = toc.process(unprocessedHTML, {
   header: '<h<%= level %><%= attrs %> id="<%= anchor %>"><%= header %></h<%= level %>>',
-  toc: '<div class="toc"><%= toc %></div>',
+  TOC: '<div class="toc"><%= toc %></div>',
   openUL: '<ul data-depth="<%= depth %>">',
   closeUL: '</ul>',
   openLI: '<li data-level="H<%= level %>"><a href="#<%= anchor %>"><%= text %></a>',
