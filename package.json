@@ -35,7 +35,7 @@
   },
   "keywords": [],
   "dependencies": {
-    "slug": "~0.2.2",
+    "slug": "~0.4.1",
     "entities": "~0.2.0",
     "lodash": "~1.0.1"
   }
